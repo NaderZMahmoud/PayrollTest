@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using PayrollTest.API.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,6 +10,12 @@ namespace PayrollTest.API.Controllers
     [ApiController]
     public class PaycheckController : ControllerBase
     {
+        private readonly PayCheck _defaultPaycheck;
+
+        public PaycheckController(IOptions<PayCheck> defaultPaycheck)
+        {
+            _defaultPaycheck = defaultPaycheck.Value;
+        }
         // GET: api/<PaycheckController>
         [HttpGet]
         public IEnumerable<string> Get()
