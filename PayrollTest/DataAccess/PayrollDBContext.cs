@@ -11,5 +11,6 @@ namespace PayrollTest.API.DataAccess
         public DbSet<Benefit> Benefits { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<PayCheck> PayChecks { get; set; }
+       
     }
 }

@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PayrollTest.API.Resources;
+using PayrollTest.API.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -8,6 +10,21 @@ namespace PayrollTest.API.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
+        private readonly IEmployeeService _employeeService;
+
+        public EmployeeController(IEmployeeService employeeService)
+        {
+            _employeeService = employeeService; 
+        }
+        
+        public ActionResult<BenefitResource> AddBenefit(Guid EmployeeId,Guid benefitId)
+        {
+            var result =_employeeService.AddBenefit(EmployeeId,benefitId);
+            if (result != null)
+                return Ok(result);
+            else
+                return NotFound();
+        }
         // GET: api/<EmployeeController>
         [HttpGet]
         public IEnumerable<string> Get()
